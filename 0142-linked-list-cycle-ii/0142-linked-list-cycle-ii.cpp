@@ -9,6 +9,8 @@
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
+        if(head == nullptr || head->next == nullptr) return NULL;
+        
         ListNode* slowPtr = head;
         ListNode* fastPtr = head;
         
@@ -18,7 +20,7 @@ public:
             if(slowPtr == fastPtr) break;
         }
         
-        if(!(fastPtr && fastPtr->next)) return NULL; // No cycle
+        if(slowPtr != fastPtr) return NULL; // No cycle
         
         // There is a cycle
         while (true) {
