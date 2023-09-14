@@ -15,7 +15,7 @@ public:
         ListNode* fastPtr = head->next;
         
         while(true){
-            if(slowPtr == nullptr || fastPtr == nullptr || fastPtr->next == nullptr) return false;
+            if(fastPtr == nullptr || fastPtr->next == nullptr) return false;
             if(slowPtr == fastPtr) return true;
             slowPtr = slowPtr->next;
             fastPtr = fastPtr->next->next;
