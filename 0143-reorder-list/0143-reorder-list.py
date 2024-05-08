@@ -19,6 +19,7 @@ class Solution(object):
             
         curr = head
         
+        # Half of the nodes from the top of the stack get inserted into alternating positions
         for i in range(len(stack)/2):
             node = stack.pop()
             node.next = curr.next
