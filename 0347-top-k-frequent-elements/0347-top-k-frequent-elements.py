@@ -16,6 +16,7 @@ class Solution(object):
         res = []
         for idx, num in enumerate(sorted_by_values):
             if k == idx:
-                return res
+                break
             res.append(num)
+            
         return res
