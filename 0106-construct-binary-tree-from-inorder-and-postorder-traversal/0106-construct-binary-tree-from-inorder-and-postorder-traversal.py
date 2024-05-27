@@ -17,6 +17,6 @@ class Solution:
         
         # splitting using index i, we can easily see which items are left and right
         root.left = self.buildTree(inorder[:i], postorder[:i])
-        root.right = self.buildTree(inorder[i + 1:], postorder[i:-1])
+        root.right = self.buildTree(inorder[i + 1:], postorder[i:-1]) # sizes must be the same, and we must still pass the last node of postorder is passed recursively
         
         return root
