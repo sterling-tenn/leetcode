@@ -1,25 +1,18 @@
 class Solution:
     def isValid(self, s: str) -> bool:
+        hashmap = {")":"(",
+                   "}":"{",
+                   "]":"["
+                  }
         stack = []
-        for char in s:
-            # opening bracket
-            if char in "({[":
-                stack.append(char)
-            # closing bracket
-            else:
-                # starts with closing bracket - invalid
-                if not stack:
-                    return False
-                if char == ")" and stack[-1] != "(":
-                    return False
-                if char == "}" and stack[-1] != "{":
-                    return False
-                if char == "]" and stack[-1] != "[":
-                    return False
-                stack.pop()
-                
-        # openening bracket was never closed
-        if len(stack) != 0:
-            return False
         
-        return True
+        for c in s:
+            if c not in hashmap:
+                stack.append(c)
+                continue
+                
+            if not stack or stack[-1] != hashmap[c]:
+                return False
+            stack.pop()
+            
+        return not stack
