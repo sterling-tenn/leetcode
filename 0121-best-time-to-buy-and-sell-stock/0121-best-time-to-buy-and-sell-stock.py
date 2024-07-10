@@ -1,20 +1,12 @@
-class Solution(object):
-    def maxProfit(self, prices):
-        """
-        :type prices: List[int]
-        :rtype: int
-        """
-        max_profit = 0
-        
-        # two pointers to represent sliding window (buy and sell)
-        left, right = 0, 1
-        
-        while right < len(prices):
-            if prices[left] < prices[right]:
-                max_profit = max(max_profit, prices[right] - prices[left])
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        buy, sell = 0, 1
+        max_p = 0
+        while sell < len(prices):
+            if prices[sell] > prices[buy]:
+                max_p = max(max_p, prices[sell] - prices[buy])
             else:
-                # found a cheaper time to buy
-                left = right
-            right += 1 # keep looking into the future for a high price to sell
-                
-        return max_profit
+                buy = sell
+            sell += 1
+            
+        return max_p
