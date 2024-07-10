@@ -1,22 +1,17 @@
-class Solution(object):
-    def topKFrequent(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: List[int]
-        """
-        # count and keep track of occurrences
-        hashmap = {}
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        buckets = [[] for _ in range(len(nums) + 1)]
+        
+        count = {}
         for num in nums:
-            hashmap[num] = hashmap.get(num, 0) + 1
-        
-        sorted_by_values = sorted(hashmap, key = lambda x : hashmap[x], reverse = True)
-        
-        # append k values to the result
-        res = []
-        for idx, num in enumerate(sorted_by_values):
-            if k == idx:
-                break
-            res.append(num)
+            count[num] = count.get(num, 0) + 1
             
-        return res
+        for num, c in count.items():
+            buckets[c].append(num)
+            
+        res = []
+        for bucket in reversed(buckets):
+            for num in bucket:
+                res.append(num)
+                if len(res) == k:
+                    return res
