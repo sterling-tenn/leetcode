@@ -1,27 +1,27 @@
-class Solution(object):
-    def searchMatrix(self, matrix, target):
-        """
-        :type matrix: List[List[int]]
-        :type target: int
-        :rtype: bool
-        """
-        for nums in matrix:
-            if self.binarySearch(nums, target):
-                return True
-        return False
-    
-    # Binary Search https://leetcode.com/problems/binary-search/
-    def binarySearch(self, nums, target):
-        left = 0
-        right = len(nums) - 1
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        t, b = 0, len(matrix) - 1
+        found_row = -1
+        while t <= b:
+            mid = t + ((b - t) // 2)
+            if target > matrix[mid][len(matrix[0]) - 1]:
+                t = mid + 1
+            elif target < matrix[mid][0]:
+                b = mid - 1
+            else:
+                found_row = mid
+                break
         
-        while left <= right:
-            mid = (left + right) // 2
-            if nums[mid] > target:
-                right = mid - 1
-            elif nums[mid] < target:
-                left = mid + 1
+        if found_row == -1:
+            return False
+        
+        l, r = 0, len(matrix[0]) - 1
+        while l <= r:
+            mid = l + ((r - l) // 2)
+            if matrix[found_row][mid] > target:
+                r = mid - 1
+            elif matrix[found_row][mid] < target:
+                l = mid + 1
             else:
                 return True
-                
         return False
