@@ -1,25 +1,14 @@
-class Solution(object):
-    def kClosest(self, points, k):
-        """
-        :type points: List[List[int]]
-        :type k: int
-        :rtype: List[List[int]]
-        """
+class Solution:
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        minheap = []
         
-        # calculate distances
-        minHeap = []
         for x, y in points:
-            dist_squared = (x ** 2) + (y ** 2) # from origin
-            minHeap.append([dist_squared, x, y])
-            
-        # Use minHeap (heapq.heapipfy) for O(n) time complexity, better than brute force and sort which is O(nlogn)
-        heapq.heapify(minHeap)
+            d_squared = x**2 + y**2
+            minheap.append([d_squared, x, y])
+        heapq.heapify(minheap)
         
-        # pop k items from the heap
         res = []
-        while k > 0:
-            dist_squared, x, y = heapq.heappop(minHeap)
-            res.append([x, y])
-            k -= 1
-        
+        for _ in range(k):
+            d_squared, x, y = heapq.heappop(minheap)
+            res.append([x,y])
         return res
